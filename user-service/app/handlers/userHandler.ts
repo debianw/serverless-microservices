@@ -5,6 +5,8 @@ import { APIGatewayProxyEventV2 } from "aws-lambda";
 import middy from "@middy/core";
 import jsonBodyParser from "@middy/http-json-body-parser";
 import {UserRepository} from "../repositories/userRepository";
+import {plainToClass} from "class-transformer";
+import {SignupDto} from "../dtos/signup.dto";
 
 container.register("UserService", { useClass: UserService });
 container.register("UserRepository", { useClass: UserRepository });
@@ -12,6 +14,7 @@ container.register("UserRepository", { useClass: UserRepository });
 const userService = container.resolve(UserService);
 
 export const signUp = middy(async (event: APIGatewayProxyEventV2) => {
+  const userData = plainToClass(SignupDto, event.body)
   const response = await userService.signUp();
   return successResponse(response);
 }).use(jsonBodyParser());
