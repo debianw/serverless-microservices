@@ -32,5 +32,5 @@ export const successResponse = (data: unknown) => {
 };
 
 export const errorResponse = (code: number = 500, error: unknown) => {
-  return response(code, "ops, failure");
+  return response(code, "ops, failure", error);
 };

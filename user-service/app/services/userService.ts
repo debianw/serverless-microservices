@@ -1,17 +1,17 @@
-import {UserRepository} from "../repositories/userRepository";
-import {inject, injectable} from "tsyringe";
+import { SignupDto } from "app/dtos/signup.dto";
+import { UserRepository } from "../repositories/userRepository";
+import { inject, injectable } from "tsyringe";
 
 @injectable()
 export class UserService {
-  constructor(@inject('UserRepository') private userRepo: UserRepository) {
-  }
+  constructor(@inject("UserRepository") private userRepo: UserRepository) {}
 
   async signIn() {
     return { data: "signIn" };
   }
 
-  async signUp() {
-    await this.userRepo.createUser()
+  async signUp(dto: SignupDto) {
+    await this.userRepo.createUser(dto);
     return { data: "signUp" };
   }
 
@@ -24,7 +24,7 @@ export class UserService {
   }
 
   async createProfile() {
-    return { data: "create profile"}
+    return { data: "create profile" };
   }
 
   async payment() {

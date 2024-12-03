@@ -11,6 +11,11 @@ provider:
   region: "us-east-1"
   httpApi:
     cors: true
+  environment:
+    DB_USER: ${env:DB_USER}
+    DB_NAME: ${env:DB_NAME}
+    DB_PASSWORD: ${env:DB_PASSWORD}
+    DB_PORT: ${env:DB_PORT}
 
 functions:
   signup:
